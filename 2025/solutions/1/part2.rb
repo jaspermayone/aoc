@@ -1,53 +1,25 @@
 # frozen_string_literal: true
 
-require 'optparse'
+pos = 50
+zeros = 0
 
-def main(argv)
-  options = {}
-  OptionParser.new do |opts|
-    opts.banner = 'Usage: part1.rb [options]'
-    opts.on('-fFILE', '--file=FILE', 'File to scan') { |v| options[:file] = v }
-  end.parse!(argv)
+File.foreach('input.txt') do |line|
+  direction = line[0]
+  distance  = line[1..].strip.to_i
 
-  file = options[:file]
-
-  pos = 50
-  zeros = 0
-
-  File.foreach(file) do |line|
-    direction = line[0]
-    distance  = line[1..].strip.to_i
-
-    case direction
-    when 'L'
-      # pos = (pos - distance) % 100
-
-      (1..distance).each do |i|
-        pos = (pos - 1) % 100
-        if pos == 0
-          zeros += 1
-        end
-      end
-
-    when 'R'
-      # pos = (pos + distance) % 100
-
-      (1..distance).each do |i|
-        pos = (pos + 1) % 100
-        if pos == 0
-          zeros += 1
-        end
-      end
-
+  case direction
+  when 'L'
+    (1..distance).each do |_i|
+      pos = (pos - 1) % 100
+      zeros += 1 if pos.zero?
     end
 
+  when 'R'
+    (1..distance).each do |_i|
+      pos = (pos + 1) % 100
+      zeros += 1 if pos.zero?
+    end
   end
-
-  puts "zeros #{zeros}"
-
-
 end
 
-if __FILE__ == $PROGRAM_NAME
-  main(ARGV)
-end
+puts "zeros #{zeros}"
