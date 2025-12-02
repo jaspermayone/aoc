@@ -3,8 +3,6 @@
 line = File.readlines('input.txt')[0]
 arr = line.split(',')
 
-# puts arr
-
 invalid_ids = []
 
 def repeated_pattern?(str)
