@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-grid = File.readlines('input.txt', chomp: true).map(&:chars)
+grid = File.readlines('logan-input.txt', chomp: true).map(&:chars)
 rows = grid.length
 cols = rows.zero? ? 0 : grid[0].length
 
@@ -18,9 +18,7 @@ def find_neighbors(grid, row, col)
   directions.each do |dr, dc|
     r = row + dr
     c = col + dc
-    if r.between?(0, rows - 1) && c.between?(0, cols - 1)
-      result << [r, c]
-    end
+    result << [r, c] if r.between?(0, rows - 1) && c.between?(0, cols - 1)
   end
   result
 end
@@ -40,4 +38,5 @@ rows.times do |r|
   end
 end
 
+# puts grid[0].inspect
 puts accessible_count
