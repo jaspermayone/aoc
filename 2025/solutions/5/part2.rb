@@ -14,8 +14,6 @@ File.foreach(INPUT_PATH, chomp: true) do |line|
   end
 end
 
-puts fresh_ranges.inspect
-
 merged = fresh_ranges.sort_by(&:begin).each_with_object([]) do |r, acc|
   if acc.empty? || r.begin > acc.last.end + 0 # disjoint
     acc << (r.begin..r.end)
