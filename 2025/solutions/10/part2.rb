@@ -108,6 +108,7 @@ def solve_component(b_full, t_full, counters, buttons)
     # Eliminate other rows
     m.times do |r|
       next if r == row || aug[r][col].zero?
+
       factor = aug[r][col]
       (col..n).each { |j| aug[r][j] -= factor * aug[row][j] }
     end
@@ -137,6 +138,7 @@ def solve_component(b_full, t_full, counters, buttons)
       x[col] = aug[i][n]
     end
     return nil if x.any?(&:negative?) || x.any? { |v| v.denominator != 1 }
+
     return x.map(&:to_i).sum
   end
 
@@ -152,6 +154,7 @@ def solve_component(b_full, t_full, counters, buttons)
       free_cols.each_with_index { |f, j| x[col] -= aug[i][f] * free_vals[j] }
     end
     return nil if x.any?(&:negative?) || x.any? { |v| v.denominator != 1 }
+
     x.map(&:to_i).sum
   end
 
@@ -181,6 +184,7 @@ def solve_component(b_full, t_full, counters, buttons)
   end
 
   raise "No solution found (m=#{m}, n=#{n}, free=#{free_cols.size})" if best.infinite?
+
   best
 end
 

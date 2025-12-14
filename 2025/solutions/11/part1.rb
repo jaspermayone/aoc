@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Read all lines from STDIN and build adjacency list
 adj = Hash.new { |h, k| h[k] = [] }
 
@@ -15,8 +17,8 @@ ARGF.each_line do |line|
   adj[name.strip] = children
 end
 
-start = "you"
-target = "out"
+start = 'you'
+target = 'out'
 
 # Memoization for number of paths from node to target
 memo = {}
